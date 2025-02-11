@@ -1,20 +1,32 @@
 import React from 'react';
-import Home from './Home';
+import NavBar from './Components/NavBar';
+import About from './Components/About';
+import Home from './Components/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Home />,
-    },
+      element: (
+        <>
+          <NavBar />
+          <Home />
+        </>
+      ),
+    },{
+      path: '/about',
+      element: (
+        <>
+          <NavBar />
+          <About />
+        </>
+      ),
+    }
+    
   ]);
 
-  return (
-    <div>
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
