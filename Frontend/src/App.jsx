@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from './Components/NavBar';
 import About from './Components/About';
 import Home from './Components/Home';
 import Services from './Components/Services';
@@ -13,7 +12,6 @@ const App = () => {
       path: '/',
       element: (
         <>
-          <NavBar />
           <Home />
         </>
       ),
@@ -21,7 +19,6 @@ const App = () => {
       path: '/about',
       element: (
         <>
-          <NavBar />
           <About />
         </>
       ),
@@ -29,7 +26,6 @@ const App = () => {
       path: '/services',
       element: (
         <>
-          <NavBar />
           <Services/>
         </>
       ),
@@ -37,7 +33,6 @@ const App = () => {
       path: '/contact',
       element: (
         <>
-          <NavBar />
           <Contact />
         </>
       ),

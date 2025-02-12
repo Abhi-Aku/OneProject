@@ -1,45 +1,74 @@
-import React from 'react'
+export default function HeroSection() {
+  const products = [
+    {
+      id: 1,
+      name: "Product 1",
+      href: "#",
+      imageSrc: "abhi.png",
+      imageAlt: "Product 1 Image",
+      color: "Red",
+      price: "$49.99",
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      href: "#",
+      imageSrc: "abhi.png",
+      imageAlt: "Product 2 Image",
+      color: "Blue",
+      price: "$59.99",
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      href: "#",
+      imageSrc: "abhi.png",
+      imageAlt: "Product 3 Image",
+      color: "Green",
+      price: "$69.99",
+    },
+    {
+      id: 4,
+      name: "Product 4",
+      href: "#",
+      imageSrc: "abhi.png",
+      imageAlt: "Product 4 Image",
+      color: "Black",
+      price: "$79.99",
+    },
+  ];
 
-const HeroSection = () => {
-   
   return (
-    <div><be></be>
-        <section 
-      className="relative bg-cover bg-center h-screen flex items-center justify-center
-       px-6 md:px-10"
-      style={{ backgroundImage: "url('https://t3.ftcdn.net/jpg/09/38/20/44/360_F_938204480_5BZPwZ4dL5iujr2XZwzkxdFeQJoRDsRE.jpg')" }}
-    >
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        {/* Left Side - Text & Buttons */}
-        <div className="text-white text-center md:text-left space-y-6">
-          <h1 className="text-4xl md:text-5xl  font-bold leading-tight">
-            Welcome to Our Website
-          </h1>
-          <p className="text-lg text-gray-200">
-            Discover the best services with us. Join us to experience something amazing.
-          </p>
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center md:justify-start">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg">
-              Get Started
-            </button>
-            <button className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold shadow-lg">
-              Learn More
-            </button>
-          </div>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+          Customers also purchased
+        </h2>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <div key={product.id} className="group relative">
+              <img
+                alt={product.imageAlt}
+                src={product.imageSrc}
+                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+              />
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <a href={product.href}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      {product.name}
+                    </a>
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                </div>
+                <p className="text-sm font-medium text-gray-900">{product.price}</p>
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Right Side - Image */}
-          <img
-            src="abhi.png"
-            alt="Hero"
-            className="rounded-xl  w-full max-w-xs md:max-w-lg   "
-            style={{ border : "block" }}
-          />
-       
       </div>
-    </section>
     </div>
-  )
+  );
 }
-
-export default HeroSection
