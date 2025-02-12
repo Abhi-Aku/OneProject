@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-
 app.use(express.json());
 
 // MongoDB connection
@@ -16,6 +15,9 @@ mongoose.connect(process.env.MONGODB_URI)
     
     // jwt authorization middleware
 const authenticateToken = (req, res, next) => {
+    const Authorization = req.headers['authorization'];
+    if (!Authorization) return res.status(401).json({ message: 'Auth Error' });
+
 const token= req.headers.authorization.split(' ')[1]; 
 if(!token) return res.status(401).json({message: 'Unauthorized access'});
 try {
@@ -25,20 +27,16 @@ try {
 } catch (err) {
     res.status(400).json({message: 'Invalid token'});
  }};
-
 //  Genert token
 const generateAccessToken = (user) => {
     return jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: '1h'});
 };
-
-
 // Create schema and model
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String
 });
-
 const User = mongoose.model('User', userSchema);
 // Create a new user with hashed password
 app.post('/Users', async (req, res) => {
@@ -48,7 +46,7 @@ app.post('/Users', async (req, res) => {
         const user = new User({ name, email, password: hashedPassword });
         await user.save();
         const payload = { 
-            user:  {
+            user: {
                 id: user._id, 
                 name: user.name, 
                 email: user.email
@@ -61,8 +59,8 @@ app.post('/Users', async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 });
-
 // Login user
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
